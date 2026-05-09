@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from './config';
 
 export default function AdminSEO({ onBack }) {
   const [seoData, setSeoData] = useState({});
@@ -9,7 +10,7 @@ export default function AdminSEO({ onBack }) {
   const pages = ['chat', 'friends', 'find_friend', 'nearby', 'settings'];
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/seo')
+    fetch(`${API_BASE_URL}/api/seo`)
       .then(res => res.json())
       .then(data => {
         setSeoData(data);
@@ -26,7 +27,7 @@ export default function AdminSEO({ onBack }) {
     const data = seoData[page] || { page_name: page, title: '', description: '', keywords: '' };
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch('http://localhost:5000/api/seo', {
+      const res = await fetch(`${API_BASE_URL}/api/seo`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

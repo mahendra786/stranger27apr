@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from './config';
 import AdminSEO from './AdminSEO';
 import AdminUsers from './AdminUsers';
 import AdminAvatars from './AdminAvatars';
@@ -16,7 +17,7 @@ function AdminLogin({ onLogin }) {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('http://localhost:5000/api/admin/login', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
@@ -81,7 +82,7 @@ function DashboardOverview() {
 
   useEffect(() => {
     const token = localStorage.getItem('adminToken');
-    fetch('http://localhost:5000/api/admin/stats', {
+    fetch(`${API_BASE_URL}/api/admin/stats`, {
       headers: { 'Authorization': token }
     })
       .then(res => {

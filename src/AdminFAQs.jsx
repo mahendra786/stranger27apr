@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from './config';
 
 const AdminFAQs = () => {
   const [faqs, setFaqs] = useState([]);
@@ -10,7 +11,7 @@ const AdminFAQs = () => {
   const fetchFaqs = async () => {
     console.log("AdminFAQs: Fetching FAQs...");
     try {
-      const res = await fetch('http://localhost:5000/api/faqs');
+      const res = await fetch(`${API_BASE_URL}/api/faqs`);
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
@@ -31,8 +32,7 @@ const AdminFAQs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('adminToken');
-    const baseUrl = 'http://localhost:5000';
-    const url = editingFaq ? `${baseUrl}/api/admin/faqs/${editingFaq.id}` : `${baseUrl}/api/admin/faqs`;
+    const url = editingFaq ? `${API_BASE_URL}/api/admin/faqs/${editingFaq.id}` : `${API_BASE_URL}/api/admin/faqs`;
     const method = editingFaq ? 'PUT' : 'POST';
 
     try {
@@ -57,7 +57,7 @@ const AdminFAQs = () => {
     if (!window.confirm('Delete this FAQ?')) return;
     const token = localStorage.getItem('adminToken');
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/faqs/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/faqs/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

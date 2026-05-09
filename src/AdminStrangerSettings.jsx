@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from './config';
 
 export default function AdminStrangerSettings() {
   const [names, setNames] = useState([]);
@@ -12,8 +13,8 @@ export default function AdminStrangerSettings() {
     try {
       const token = localStorage.getItem('adminToken');
       const [resNames, resCities] = await Promise.all([
-        fetch('http://localhost:5000/api/admin/stranger-names', { headers: { 'Authorization': token } }),
-        fetch('http://localhost:5000/api/admin/stranger-cities', { headers: { 'Authorization': token } })
+        fetch(`${API_BASE_URL}/api/admin/stranger-names`, { headers: { 'Authorization': token } }),
+        fetch(`${API_BASE_URL}/api/admin/stranger-cities`, { headers: { 'Authorization': token } })
       ]);
       const [dataNames, dataCities] = await Promise.all([resNames.json(), resCities.json()]);
       setNames(dataNames);
@@ -29,7 +30,7 @@ export default function AdminStrangerSettings() {
     if (!newName) return;
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch('http://localhost:5000/api/admin/stranger-names', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/stranger-names`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': token },
         body: JSON.stringify({ name: newName })
@@ -50,7 +51,7 @@ export default function AdminStrangerSettings() {
 
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch('http://localhost:5000/api/admin/stranger-cities', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/stranger-cities`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': token },
         body: JSON.stringify({ name: cityWithFlag })
@@ -63,7 +64,7 @@ export default function AdminStrangerSettings() {
     if (!window.confirm("Delete this name?")) return;
     try {
       const token = localStorage.getItem('adminToken');
-      await fetch(`http://localhost:5000/api/admin/stranger-names/${id}`, {
+      await fetch(`${API_BASE_URL}/api/admin/stranger-names/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': token }
       });
@@ -75,7 +76,7 @@ export default function AdminStrangerSettings() {
     if (!window.confirm("Delete this city?")) return;
     try {
       const token = localStorage.getItem('adminToken');
-      await fetch(`http://localhost:5000/api/admin/stranger-cities/${id}`, {
+      await fetch(`${API_BASE_URL}/api/admin/stranger-cities/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': token }
       });

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from './config';
 
 const MALE_NAMES = ["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Charles", "Leo", "Alex", "Max", "Sam", "Oliver"];
 const FEMALE_NAMES = ["Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Karen", "Emma", "Olivia", "Ava", "Sophia", "Isabella"];
@@ -20,7 +21,7 @@ export default function AdminUsers() {
     setLoading(true);
     try {
       const token = localStorage.getItem('adminToken');
-      const resUsers = await fetch(`http://localhost:5000/api/admin/users?page=${page}&limit=${limit}&search=${encodeURIComponent(search)}`, {
+      const resUsers = await fetch(`${API_BASE_URL}/api/admin/users?page=${page}&limit=${limit}&search=${encodeURIComponent(search)}`, {
         headers: { 'Authorization': token }
       });
       if (!resUsers.ok) throw new Error('Failed to fetch users');
@@ -35,7 +36,7 @@ export default function AdminUsers() {
 
   const fetchAvatars = async () => {
     try {
-      const resAvatars = await fetch('http://localhost:5000/api/avatars');
+      const resAvatars = await fetch(`${API_BASE_URL}/api/avatars`);
       if (resAvatars.ok) {
         const dataAvatars = await resAvatars.json();
         setAvatars(dataAvatars);
@@ -57,7 +58,7 @@ export default function AdminUsers() {
     if (!window.confirm("Are you sure you want to delete this user? All their matches and messages will be lost.")) return;
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch(`http://localhost:5000/api/admin/users/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/users/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': token }
       });
@@ -73,7 +74,7 @@ export default function AdminUsers() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch(`http://localhost:5000/api/admin/users/${editingUser.id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/users/${editingUser.id}`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',

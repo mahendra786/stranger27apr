@@ -5,6 +5,7 @@ import NearbyFriends from './NearbyFriends';
 import Settings from './Settings';
 import AdminDashboard from './AdminDashboard';
 import DatingCards from './DatingCards';
+import { API_BASE_URL } from './config';
 
 const AVATAR_BASE = 'https://api.dicebear.com/7.x/avataaars/svg';
 
@@ -25,7 +26,7 @@ function SearchingAnimation() {
   const [dynamicAvatars, setDynamicAvatars] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/avatars')
+    fetch(`${API_BASE_URL}/api/avatars`)
       .then(res => res.json())
       .then(data => setDynamicAvatars(data.map(a => a.seed_name)))
       .catch(console.error);
@@ -176,12 +177,12 @@ function App() {
   const [availableAvatars, setAvailableAvatars] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/seo')
+    fetch(`${API_BASE_URL}/api/seo`)
       .then(res => res.json())
       .then(data => setSeoData(data))
       .catch(console.error);
 
-    fetch('http://localhost:5000/api/stranger-settings')
+    fetch(`${API_BASE_URL}/api/stranger-settings`)
       .then(res => res.json())
       .then(data => {
         setStrangerNames(data.names);
@@ -191,7 +192,7 @@ function App() {
       })
       .catch(console.error);
 
-    fetch('http://localhost:5000/api/avatars')
+    fetch(`${API_BASE_URL}/api/avatars`)
       .then(res => res.json())
       .then(data => setAvailableAvatars(data))
       .catch(console.error);
@@ -291,7 +292,7 @@ function App() {
       sessionStorage.setItem('sessionId', sessionId);
     }
     const backendHost = window.location.hostname;
-    const backendUrl = `http://localhost:5000`;
+    const backendUrl = API_BASE_URL;
     // Send sessionId as userId (unique per tab) AND deviceId for profile persistence
     const newSocket = io(backendUrl, { query: { userId: sessionId, deviceId } });
     socketRef.current = newSocket;
@@ -1697,7 +1698,7 @@ const FAQList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/faqs')
+    fetch(`${API_BASE_URL}/api/faqs`)
       .then(res => res.json())
       .then(data => {
         setFaqs(data);

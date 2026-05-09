@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from './config';
 
 export default function AdminAvatars() {
   const [avatars, setAvatars] = useState([]);
@@ -10,7 +11,7 @@ export default function AdminAvatars() {
   const fetchAvatars = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/avatars');
+      const res = await fetch(`${API_BASE_URL}/api/avatars`);
       if (res.ok) {
         const data = await res.json();
         setAvatars(data);
@@ -29,7 +30,7 @@ export default function AdminAvatars() {
     if (!window.confirm("Are you sure you want to delete this avatar?")) return;
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch(`http://localhost:5000/api/admin/avatars/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/avatars/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': token }
       });
@@ -43,7 +44,7 @@ export default function AdminAvatars() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch(`http://localhost:5000/api/admin/avatars/${editingAvatar.id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/avatars/${editingAvatar.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'Authorization': token },
         body: JSON.stringify(editingAvatar)
@@ -63,7 +64,7 @@ export default function AdminAvatars() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch('http://localhost:5000/api/admin/avatars', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/avatars`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': token },
         body: JSON.stringify(newAvatar)
