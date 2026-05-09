@@ -958,6 +958,38 @@ function App() {
               <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '1rem', padding: '2rem' }}>
                 <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#222', textAlign: 'center' }}>Find a person to chat with</div>
                 <div style={{ color: '#888', fontSize: '0.95rem', textAlign: 'center' }}>Anonymous, secure, fun</div>
+                
+                <div className="creative-warning-box" style={{ 
+                  marginTop: '2.5rem', 
+                  padding: '2.5rem', 
+                  background: darkMode ? 'rgba(132, 32, 41, 0.2)' : '#f8d7da', 
+                  color: darkMode ? '#f8d7da' : '#842029', 
+                  borderRadius: '24px', 
+                  fontSize: '1rem', 
+                  lineHeight: '1.7', 
+                  textAlign: 'center',
+                  width: '95%',
+                  maxWidth: '900px',
+                  border: darkMode ? '1px solid #842029' : '1px solid #f5c2c7',
+                  boxShadow: darkMode ? '0 15px 45px rgba(0,0,0,0.5)' : '0 12px 35px rgba(132, 32, 41, 0.15)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.4s ease'
+                }}>
+                  {/* Decorative Elements */}
+                  <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '120px', height: '120px', background: 'rgba(132, 32, 41, 0.08)', borderRadius: '50%' }} />
+                  <div style={{ position: 'absolute', bottom: '-20px', left: '-20px', width: '80px', height: '80px', background: 'rgba(132, 32, 41, 0.05)', borderRadius: '50%' }} />
+                  
+                  <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
+                    <span style={{ padding: '0.4rem 0.8rem', borderRadius: '30px', background: darkMode ? '#842029' : 'rgba(132, 32, 41, 0.1)', fontSize: '0.75rem', fontWeight: '900', border: '1px solid rgba(132, 32, 41, 0.2)', whiteSpace: 'nowrap' }}>🔒 SECURE</span>
+                    <span style={{ padding: '0.4rem 0.8rem', borderRadius: '30px', background: darkMode ? '#842029' : 'rgba(132, 32, 41, 0.1)', fontSize: '0.75rem', fontWeight: '900', border: '1px solid rgba(132, 32, 41, 0.2)', whiteSpace: 'nowrap' }}>🔞 18+ ONLY</span>
+                    <span style={{ padding: '0.4rem 0.8rem', borderRadius: '30px', background: darkMode ? '#842029' : 'rgba(132, 32, 41, 0.1)', fontSize: '0.75rem', fontWeight: '900', border: '1px solid rgba(132, 32, 41, 0.2)', whiteSpace: 'nowrap' }}>👥 ANONYMOUS</span>
+                  </div>
+
+                  <p style={{ fontWeight: '500', fontSize: '0.85rem', maxWidth: '800px', margin: '0 auto' }}>
+                    <strong style={{ color: '#ff2d55', fontSize: '1.5rem', display: 'block', marginBottom: '0.8rem' }}>WARNING:</strong> This application is strictly for users aged 18 and older. By using this platform, you agree to our Terms of Service and Privacy Policy. We do not tolerate any form of harassment, hate speech, explicit content, or illegal activities. Users found violating these rules will be permanently banned without notice. We prioritize user safety and privacy; however, remember that you are chatting with strangers. Never share your real name, address, phone number, or financial details with anyone you meet here. Report any suspicious behavior immediately to our support team. Stay safe and enjoy.
+                  </p>
+                </div>
               </div>
             )}
 
@@ -1523,13 +1555,6 @@ function App() {
               </div>
             </div>
 
-            {/* Admin Section */}
-            <div className="nav-menu-card" style={{ marginTop: '1rem', border: '1px solid #ffb3c1', background: 'linear-gradient(135deg, #fff0f3, #ffe4ec)' }}>
-              <div className="nav-item" onClick={() => { setCurrentView('admin_seo'); setIsNavOpen(false); }} style={{ cursor: 'pointer' }}>
-                <span className="nav-icon">📈</span>
-                <span className="nav-text" style={{ fontWeight: 'bold', color: '#ff2d55' }}>Admin Dashboard</span>
-              </div>
-            </div>
           </div>
         </div>
       )}

@@ -203,12 +203,7 @@ export default function AdminDashboard({ onBack }) {
         {activeTab === 'users' && <AdminUsers />}
         {activeTab === 'avatars' && <AdminAvatars />}
         {activeTab === 'stranger_settings' && <AdminStrangerSettings />}
-        {activeTab === 'seo' && (
-          <div style={{ height: '100%', overflow: 'hidden' }}>
-            {/* Using the existing AdminSEO component */}
-            <AdminSEO onBack={() => {}} />
-          </div>
-        )}
+        {activeTab === 'seo' && <AdminSEO onBack={() => {}} />}
         {activeTab === 'faqs' && <AdminFAQs />}
       </div>
     </div>
